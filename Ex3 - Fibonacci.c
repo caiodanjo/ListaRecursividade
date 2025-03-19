@@ -3,7 +3,7 @@
 int calculoFibonacci (int n);
 
 int main() {
-    int n = 6, resultado;
+    int n = 6;
     
     printf("O resultado e %d", calculoFibonacci(n));
 
@@ -11,8 +11,6 @@ int main() {
 }
 
 int calculoFibonacci (int n) {
-	int resultado; 
-	
 	if(n <= 0) {
 		return (0);
 	} else if (n == 1) {
