@@ -8,11 +8,7 @@ int main() {
     printf("Digite um número: ");
     scanf("%d", &numero);
 
-    if(numero == 0) {
-        printf("0");
-    } else {
-        converterDecimal(numero);
-    }
+    converterDecimal(numero);
 
     return 0;
 }
