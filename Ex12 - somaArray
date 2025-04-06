@@ -1,0 +1,19 @@
+#include <stdio.h>
+
+int somaArray(int array[], int indice);
+
+int main() {
+    int array[4] = {1, 2, 3, 4};
+    
+    printf("A soma dos elementos do array é igual a %d.", somaArray(array, 0));
+
+    return 0;
+}
+
+int somaArray(int array[], int indice) {
+    if(indice == 4) {
+        return 0;
+    } else {
+        return array[indice] + somaArray(array, indice + 1);
+    }
+}
