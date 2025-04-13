@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int exponenciacaoRapida(int x, int n);
+
+int main() {
+    int x;
+    int n;
+    
+    printf("Digite um número: ");
+    scanf("%d", &x);
+    printf("Digite o exponente: ");
+    scanf("%d", &n);
+
+    printf("%d^%d = %d\n", x, n, exponenciacaoRapida(x, n));
+
+    return 0;
+}
+
+int exponenciacaoRapida(int x, int n) {
+    if (n == 0)
+        return 1;
+
+    int metade = exponenciacaoRapida(x, n / 2);
+
+    if (n % 2 == 0)
+        return metade * metade;
+    else
+        return x * metade * metade;
+}
