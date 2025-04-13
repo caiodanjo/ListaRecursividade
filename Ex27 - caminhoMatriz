@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+#define MAX 100
+
+void encontrarCaminhos(int x, int y, int x2, int y2, int caminho[][2], int passo, int *contador) {
+    caminho[passo][0] = x;
+    caminho[passo][1] = y;
+
+    if (x == x2 && y == y2) {
+        (*contador)++;
+        for (int i = 0; i <= passo; i++) {
+            printf("(%d,%d)", caminho[i][0], caminho[i][1]);
+            if (i < passo) printf(" → ");
+        }
+        printf("\n");
+        return;
+    }
+
+    if (y < y2)
+        encontrarCaminhos(x, y + 1, x2, y2, caminho, passo + 1, contador);
+
+    if (x < x2)
+        encontrarCaminhos(x + 1, y, x2, y2, caminho, passo + 1, contador);
+}
+
+int contarCaminhos(int x, int y, int x2, int y2) {
+    if (x == x2 && y == y2)
+        return 1;
+
+    int total = 0;
+    if (y < y2)
+        total += contarCaminhos(x, y + 1, x2, y2);
+    if (x < x2)
+        total += contarCaminhos(x + 1, y, x2, y2);
+
+    return total;
+}
+
+int main() {
+    int x1 = 0, y1 = 0;
+    int x2 = 2, y2 = 2;
+
+    int caminho[MAX][2];
+    int totalCaminhos = 0;
+
+    printf("Caminhos possíveis de (%d,%d) até (%d,%d):\n\n", x1, y1, x2, y2);
+    encontrarCaminhos(x1, y1, x2, y2, caminho, 0, &totalCaminhos);
+
+    printf("\nTotal de caminhos: %d\n", totalCaminhos);
+
+    return 0;
+}
