@@ -1,0 +1,35 @@
+#include <stdio.h>
+
+int buscaBinaria(int arr[], int inicio, int fim, int alvo);
+
+int main() {
+    int arr[] = {1, 3, 5, 7, 9};
+    int tamanho = sizeof(arr) / sizeof(arr[0]);
+    int alvo;
+    
+    printf("Digite um número para ser buscado no array: ");
+    scanf("%d", &alvo);
+
+    int resultado = buscaBinaria(arr, 0, tamanho - 1, alvo);
+
+    if (resultado != -1)
+        printf("Elemento %d encontrado no índice %d.\n", alvo, resultado);
+    else
+        printf("Elemento %d não encontrado.\n", alvo);
+
+    return 0;
+}
+
+int buscaBinaria(int arr[], int inicio, int fim, int alvo) {
+    if (inicio > fim)
+        return -1;
+
+    int meio = inicio + (fim - inicio) / 2;
+
+    if (arr[meio] == alvo)
+        return meio;
+    else if (arr[meio] > alvo)
+        return buscaBinaria(arr, inicio, meio - 1, alvo);
+    else
+        return buscaBinaria(arr, meio + 1, fim, alvo);
+}
