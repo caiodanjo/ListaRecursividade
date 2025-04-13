@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+void gerarParenteses(char *str, int pos, int aberto, int fechado, int n);
+
+int main() {
+    int n;
+    char str[2 * n + 1];
+    
+    printf("Digite o número de combinações: ");
+    scanf("%d", &n);
+
+    printf("Combinações válidas de %d pares de parênteses:\n", n);
+    gerarParenteses(str, 0, n, n, n);
+
+    return 0;
+}
+
+void gerarParenteses(char *str, int pos, int aberto, int fechado, int n) {
+    if (aberto == 0 && fechado == 0) {
+        str[pos] = '\0';
+        printf("%s\n", str);
+        return;
+    }
+
+    if (aberto > 0) {
+        str[pos] = '(';
+        gerarParenteses(str, pos + 1, aberto - 1, fechado, n);
+    }
+
+    if (fechado > aberto) {
+        str[pos] = ')';
+        gerarParenteses(str, pos + 1, aberto, fechado - 1, n);
+    }
+}
