@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+#define MAX 20
+
+int tabuleiro[MAX];
+
+bool podeColocar(int linha, int coluna) {
+    for (int i = 0; i < linha; i++) {
+        if (tabuleiro[i] == coluna ||
+            abs(tabuleiro[i] - coluna) == abs(i - linha))
+            return false;
+    }
+    return true;
+}
+
+void imprimirTabuleiro(int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (tabuleiro[i] == j)
+                printf("Q ");
+            else
+                printf(". ");
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void resolverNRainhas(int linha, int n, int *contador) {
+    if (linha == n) {
+        (*contador)++;
+        imprimirTabuleiro(n);
+        return;
+    }
+
+    for (int coluna = 0; coluna < n; coluna++) {
+        if (podeColocar(linha, coluna)) {
+            tabuleiro[linha] = coluna;
+            resolverNRainhas(linha + 1, n, contador);
+        }
+    }
+}
+
+int main() {
+    int n = 4;
+    int totalSolucoes = 0;
+
+    printf("Soluções para %d rainhas:\n\n", n);
+    resolverNRainhas(0, n, &totalSolucoes);
+    printf("Total de soluções: %d\n", totalSolucoes);
+
+    return 0;
+}
