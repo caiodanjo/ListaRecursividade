@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+void gerarSubconjuntos(int arr[], int n, int index, int subset[], int subsetIndex);
+
+int main() {
+    int arr[] = {1, 2};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int subset[n];
+
+    printf("Subconjuntos:\n");
+    gerarSubconjuntos(arr, n, 0, subset, 0);
+
+    return 0;
+}
+
+void gerarSubconjuntos(int arr[], int n, int index, int subset[], int subsetIndex) {
+    if (index == n) {
+        printf("{");
+        for (int i = 0; i < subsetIndex; i++) {
+            printf("%d", subset[i]);
+            if (i < subsetIndex - 1) printf(", ");
+        }
+        printf("}\n");
+        return;
+    }
+
+    subset[subsetIndex] = arr[index];
+    gerarSubconjuntos(arr, n, index + 1, subset, subsetIndex + 1);
+
+    gerarSubconjuntos(arr, n, index + 1, subset, subsetIndex);
+}
